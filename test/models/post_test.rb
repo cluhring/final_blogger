@@ -61,4 +61,21 @@ class PostTest < ActiveSupport::TestCase
     assert_equal "This is good.", tagged_and_commented_post.comments.last.body
   end
 
+  def test_a_post_is_initially_a_draft_and_status_is_false
+    post = Post.new(title:"Wan",
+                    body: "Twas the best of times",
+                    author: "Chris Luhring")
+    assert_equal false, post.status
+    assert_equal true, post.draft?
+    assert_equal false, post.published?
+  end
+
+  def test_a_post_is_published_if_status_is_true
+    post = Post.new(title:"Wan",
+                    body: "Twas the best of times",
+                    author: "Chris Luhring",
+                    status: true)
+    assert_equal true, post.published?
+    assert_equal false, post.draft?
+  end
 end
