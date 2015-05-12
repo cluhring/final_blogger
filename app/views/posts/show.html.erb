@@ -6,11 +6,19 @@
   	<%#= link_to tag.name, tag_path(tag) %>
   	<%# end %>
   </p>
-  <p><%= @post.body %></p>
+  <p class="post_markdown"><%= markdown(@post.body).html_safe %></p>
   <p><%= @post.author %></p>
-  <h3>Comments (<%#= @article.comments.size %>)</h3>
-  <%#= render partial: 'articles/comment', collection: @article.comments %>
-  <%#= render partial: 'comments/form' %>
+  <h3>Comments (<%= @post.comments.size %>)</h3>
+  <div class="comments">
+    <% @post.comments.each do |comment| %>
+    	<u>Comment by <%= comment.author %>:</u>
+    	<p class="comment"><%= markdown(comment.body).html_safe %></p>
+    <% end %>
+  </div>
+  <div class="my_new_comment">
+    <h4> Add a Comment to the <%= @post.title %> Post:</h4>
+    <%= render partial: 'comments/form' %><br><br>
+  </div>
   <%= link_to "<< Back to Published Posts", posts_path %><br>
   <%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Really delete the post?"} %><br>
   <%= link_to "Edit", edit_post_path(@post) %>

@@ -39,7 +39,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
-    if @post.delete
+    if @post.destroy
       flash.notice = "#{@post.title} Post has been deleted."
       redirect_to root_path
     else
@@ -50,6 +50,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @comment = Comment.new
   end
 
   private

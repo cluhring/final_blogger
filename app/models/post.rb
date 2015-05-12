@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
-  has_many :comments
-  has_many :taggings
+include PostHelper
+  has_many :comments, dependent: :delete_all
+  has_many :taggings, dependent: :delete_all
   has_many :tags, through: :taggings
 
   def draft?
@@ -9,13 +10,5 @@ class Post < ActiveRecord::Base
 
   def published?
     status
-  end
-
-  def published_helper
-    if published?
-      return "Published"
-    elsif draft?
-      return "Draft"
-    end
   end
 end

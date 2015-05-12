@@ -6,6 +6,7 @@ class PostIntegrationTest < ActionDispatch::IntegrationTest
   def setup
     @post = Post.create(title: "My First Post",
                         author: "grumpy",
+                        body: "This is *bongos*, indeed.",
                         status: true,
                         id: 505 )
   end
@@ -74,6 +75,15 @@ class PostIntegrationTest < ActionDispatch::IntegrationTest
     assert_equal "/posts/505", current_path
     within ('h1') do
       assert page.has_content?('My First Post')
+    end
+  end
+
+  test "A post's body is rendered in HTML if markdown is entered" do
+    visit "/"
+    click_link_or_button('My First Post')
+    refute page.has_content?('This is *bongos*, indeed.')
+    within ("em") do
+      assert page.has_content?("bongos")
     end
   end
 end
