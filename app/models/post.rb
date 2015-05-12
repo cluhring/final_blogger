@@ -5,7 +5,7 @@ include PostHelper
   has_many :tags, through: :taggings
   has_attached_file :image,
                     storage: :s3,
-                    s3_credentials: Proc.new{|a| a.instance.s3_credentials }
+                    s3_credentials: Proc.new{|a| a.instance.s3_credentials },
                     styles: { medium: "300x300>", thumb: "100x100>" }
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
