@@ -1,0 +1,17 @@
+<div class="container">
+  <h1><%= @post.title %></h1>
+  <p>
+	   Tags:
+  	<%# @article.tags.each do |tag| %>
+  	<%#= link_to tag.name, tag_path(tag) %>
+  	<%# end %>
+  </p>
+  <p><%= @post.body %></p>
+  <p><%= @post.author %></p>
+  <h3>Comments (<%#= @article.comments.size %>)</h3>
+  <%#= render partial: 'articles/comment', collection: @article.comments %>
+  <%#= render partial: 'comments/form' %>
+  <%= link_to "<< Back to Published Posts", posts_path %><br>
+  <%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Really delete the post?"} %><br>
+  <%= link_to "Edit", edit_post_path(@post) %>
+</div>

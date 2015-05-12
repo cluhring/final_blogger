@@ -10,4 +10,12 @@ class Post < ActiveRecord::Base
   def published?
     status
   end
+
+  def published_helper
+    if published?
+      return "Published"
+    elsif draft?
+      return "Draft"
+    end
+  end
 end

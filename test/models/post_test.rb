@@ -70,7 +70,7 @@ class PostTest < ActiveSupport::TestCase
     assert_equal false, post.published?
   end
 
-  def test_a_post_is_published_if_status_is_true
+  def test_a_post_is_published_when_status_is_true
     post = Post.new(title:"Wan",
                     body: "Twas the best of times",
                     author: "Chris Luhring",
