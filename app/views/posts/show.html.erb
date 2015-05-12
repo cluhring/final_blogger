@@ -1,5 +1,6 @@
 <div class="container">
   <h1><%= @post.title %></h1>
+  <strong>Post Image: </strong><%= image_tag @post.image.url(:medium) %><br>
   <p>
 	   Tags:
   	<%# @article.tags.each do |tag| %>

@@ -6,21 +6,25 @@
 	<% end %>
 	</ul>
 	<p>
-		<%= f.label :title %><br />
+		<%= f.label :title %><br>
 		<%= f.text_field :title %>
 	</p>
   <p>
-    <%= f.label :body %><br />
+    <%= f.label :body %><br>
     <%= f.text_area :body %>
   </p>
   <p>
-    <%= f.label :author %><br />
+    <%= f.label :author %><br>
     <%= f.text_field :author %>
   </p>
   <p>
-    <%= f.label "Publish?" %><br />
+    <%= f.label "Publish?" %><br>
     <%= check_box(:post, :status, {}, true)%>
   </p>
+	<p>
+		<%= f.label :image, "Attach an Image" %><br>
+		<%= f.file_field :image %>
+	</p>
 	<p>
 		<%= f.submit "Submit" %>
 	</p>
