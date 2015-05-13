@@ -16,7 +16,7 @@
             </tr>
           </thead>
           <tbody class="all-posts">
-    				<% @posts.each do |post| %>
+            <% @posts.each do |post| %>
               <% if post.published? %>
                 <tr class="POSTS">
                   <td class="id"><%= post.id %></td>
@@ -39,9 +39,20 @@
     <div class="taggings col-md-3">
       <p>
          All Tags:
-        <% @tags.each do |tag| %>
-        <%= button_to tag.name, class: 'index-tags', id: "post_#{tag.name}" %>
+        <% if @tags && @tags.count > 0 %>
+          <div class="text-center btn-group">
+            <div class="col-sm-12" id="btn-categories">
+              <div class="btn btn-default category-btn" id="show-all">Show All</div>
+              <% @tags.each do |tag| %>
+                <div class="btn btn-default category-btn" id="<%= tag.name.parameterize %>"><%= tag.name %></div>
+              <% end %>
+              </div>
+            </div>
+          </div>
         <% end %>
+        <%# @tags.each do |tag| %>
+        <%#= button_to tag.name, class: 'index-tags', id: "post_#{tag.name}" %>
+        <%# end %>
       </p>
       <%= link_to "Add tag", new_tag_path %><br>
     </div>

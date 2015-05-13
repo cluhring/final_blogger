@@ -1,4 +1,5 @@
 module PostHelper
+
   def published_helper
     if published?
       return "Published"
@@ -6,4 +7,5 @@ module PostHelper
       return "Draft"
     end
   end
+  
 end
