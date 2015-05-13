@@ -57,4 +57,10 @@ class PostsControllerTest < ActionController::TestCase
     get :show, id: @post
     assert_response 200
   end
+
+  test "posts #drafted" do
+    get :drafted
+    assert_response :success
+    assert_routing '/drafted', controller: 'posts', action: 'drafted'
+  end
 end

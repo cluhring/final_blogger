@@ -2,7 +2,6 @@ require 'test_helper'
 
 class CommentIntegrationTest < ActionDispatch::IntegrationTest
   include Capybara::DSL
-  attr_reader :post1, :post2
 
   def setup
     @post1 = Post.create(title: "My Published Post",
@@ -15,15 +14,15 @@ class CommentIntegrationTest < ActionDispatch::IntegrationTest
                         body: "Her body",
                         status: false,
                         id: 78 )
-    @comment1 = Comment.create(author: "Sir Mix Alot",
-                              body: "## An h2 header ##",
-                              post_id: post1.id)
-    @comment2 = Comment.create(author: "Miss Mix Alot",
-                              body: "## An h2 header ##",
-                              post_id: post2.id)
+    Comment.create(author: "Sir Mix Alot",
+                   body: "## An h2 header ##",
+                   post_id: @post1.id)
+    Comment.create(author: "Miss Mix Alot",
+                   body: "## An h2 header ##",
+                   post_id: @post2.id)
   end
 
-  test "A user can see and add comments to a post" do
+  test "A user can see and click a button to add comments to a post" do
     visit "/"
     click_link_or_button('My Published Post')
     assert_equal "/posts/505", current_path
@@ -46,7 +45,6 @@ class CommentIntegrationTest < ActionDispatch::IntegrationTest
     assert page.has_content?('Peas and Carrots')
     assert page.has_content?('Comment by Jack:')
     assert page.has_content?('Thanks for successfully adding your comment, Jack.')
-    save_and_open_page
   end
 
   test "A user can delete a post and the associated comments with one click" do

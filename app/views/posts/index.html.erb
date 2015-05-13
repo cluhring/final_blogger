@@ -1,34 +1,47 @@
 <div class="container">
   <h1>All Published Posts</h1>
   <div class="row">
-    <div class="panel-heading">
-    </div>
-    <table class="table">
-      <thead>
-        <tr class="filters">
-          <th>Id</th>
-          <th>Title</th>
-          <th>Author</th>
-          <th>Published?</th>
-          <th>Edit</th>
-          <th>Delete</th>
-        </tr>
-      </thead>
-      <tbody class="all-posts">
-				<% @posts.each do |post| %>
-          <% if post.published? %>
-            <tr class="POSTS">
-              <td class="id"><%= post.id %></td>
-              <td class="title"><%= link_to post.title, post_path(post), class: 'post_title', id: "post_#{post.title}" %></td>
-              <td class="author"><%= post.author %></td>
-              <td class="status"><%= post.published_helper %></td>
-  						<td><%= link_to "Edit", edit_post_path(post) %></td>
-              <td><%= link_to "Delete", post_path(post), method: :delete, data: {confirm: "Really delete the post?"} %></td>
+    <div class="left-side col-md-9">
+      <div class="panel-heading">
+        <table class="table">
+          <thead>
+            <tr class="filters">
+              <th>Id</th>
+              <th><input type="submit" class="btn btn-default filter" id="filter-title" value="Filter by Title"><input type="text" id="post_title" class="form-control" placeholder="Title"></th>
+              <th><input type="submit" class="btn btn-default filter" id="filter-author" value="Filter by Author"><input type="text" id="author_name" class="form-control" placeholder="Author"></th>
+              <th>Published?</th>
+              <th>Tags</th>
+              <th>Edit Post</th>
+              <th>Delete Post</th>
             </tr>
-          <% end %>
+          </thead>
+          <tbody class="all-posts">
+    				<% @posts.each do |post| %>
+              <% if post.published? %>
+                <tr class="POSTS">
+                  <td class="id"><%= post.id %></td>
+                  <td class="title"><%= link_to post.title, post_path(post), class: 'post_title', id: "post_#{post.title}" %></td>
+                  <td class="author"><%= post.author %></td>
+                  <td class="status"><%= post.published_helper %></td>
+                  <td class="tags"><%#= post.tags %></td>
+      						<td><%= link_to "Edit", edit_post_path(post) %></td>
+                  <td><%= link_to "Delete", post_path(post), method: :delete, data: {confirm: "Really delete the post?"} %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="taggings col-md-3">
+      <p>
+         All Tags:
+        <% @tags.each do |tag| %>
+        <%= button_to tag.name, class: 'index-tags', id: "post_#{tag.name}" %>
         <% end %>
-      </tbody>
-    </table>
+      </p>
+      <%= link_to "Add tag", new_tag_path %><br>
+    </div>
   </div>
 </div>
 <li>

@@ -1,0 +1,17 @@
+<div class="my_new_tag">
+  Add a Tag
+  <%= form_for [@post, @tag], html: {multipart: true} do |f| %>
+    <ul>
+      <% @tag.errors.full_messages.each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
+    <p>
+      <%= f.label :tag_name %><br>
+      <%= f.text_area :name %>
+    </p>
+    <p>
+      <%= f.submit value: "submit" %>
+    </p>
+  <% end %>
+</div>

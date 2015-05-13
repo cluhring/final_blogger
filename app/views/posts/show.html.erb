@@ -1,12 +1,14 @@
 <div class="container">
   <h1><%= @post.title %></h1>
   <strong>Post Image: </strong><%= image_tag @post.image.url(:medium) %><br>
-  <p>
-	   Tags:
-  	<%# @article.tags.each do |tag| %>
-  	<%#= link_to tag.name, tag_path(tag) %>
-  	<%# end %>
-  </p>
+  <div class="tags">
+    <p>
+       Tags:
+      <% @post.tags.each do |tag| %>
+      <%= tag.name %>
+      <% end %>
+    </p>
+  </div>
   <p class="post_markdown"><%= markdown(@post.body).html_safe %></p>
   <p><%= @post.author %></p>
   <h3>Comments (<%= @post.comments.size %>)</h3>
