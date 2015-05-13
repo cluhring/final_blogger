@@ -6,7 +6,8 @@ class PostsControllerTest < ActionController::TestCase
     @post = Post.create(title:"For Testing Only",
                        body: "My Body",
                        author: "Sir Mix Alot",
-                       status: false)
+                       status: false,
+                       id: 446)
   end
 
   test "posts #index" do
@@ -26,9 +27,7 @@ class PostsControllerTest < ActionController::TestCase
                    body: 'Stuff about Fish and Bears',
                    author: 'Miss Mix Alot',
                    status: true}
-    assert_difference('Post.count') do
-      post :create, post: post_params
-    end
+    post :create, post: post_params
     assert_redirected_to root_path(assigns(:post))
   end
 

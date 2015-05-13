@@ -23,7 +23,10 @@
                   <td class="title"><%= link_to post.title, post_path(post), class: 'post_title', id: "post_#{post.title}" %></td>
                   <td class="author"><%= post.author %></td>
                   <td class="status"><%= post.published_helper %></td>
-                  <td class="tags"><%#= post.tags %></td>
+                  <td class="tags">
+                    <% post.tags.each do |tag| %>
+                    <%= tag.name %>
+                    <% end %></td>
       						<td><%= link_to "Edit", edit_post_path(post) %></td>
                   <td><%= link_to "Delete", post_path(post), method: :delete, data: {confirm: "Really delete the post?"} %></td>
                 </tr>

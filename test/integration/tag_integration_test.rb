@@ -35,16 +35,21 @@ class TagIntegrationTest < ActionDispatch::IntegrationTest
   test "A user can create a new tag" do
     visit "/"
     click_link_or_button('Add tag')
-    # save_and_open_page
+    fill_in "tag[name]", with: "Jack"
+    click_link_or_button('submit')
+    assert page.has_button?('Jack')
   end
 
-  test "A user can visit a posts' show page and edit its tags" do
+  test "A user can edit a posts' tags" do
     visit "/"
-    click_link_or_button('My Published Tagged Post')
-    assert_equal "/posts/505", current_path
-    save_and_open_page
-    within ('.tags') do
-      assert page.has_content?('Good Stuff')
-    end
+    refute page.has_content?('Bad Stuff')
+    click_link_or_button('Edit')
+    assert_equal "/posts/505/edit", current_path
+    assert page.has_content?('Good Stuff')
+    assert page.has_content?('Bad Stuff')
+    find(:css, "#tag_list_tags_bad_stuff[value='Bad Stuff']").set(true)
+    click_link_or_button('Submit')
+    assert_equal "/", current_path
+    assert page.has_content?('Bad Stuff')
   end
 end

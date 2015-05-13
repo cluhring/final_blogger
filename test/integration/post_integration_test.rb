@@ -9,6 +9,7 @@ class PostIntegrationTest < ActionDispatch::IntegrationTest
                         body: "This is *bongos*, indeed.",
                         status: true,
                         id: 505 )
+    Tag.create(name: "Cool")
   end
 
   test "As an anonymous user, I can see my post on the home page" do
@@ -20,26 +21,25 @@ class PostIntegrationTest < ActionDispatch::IntegrationTest
     assert page.has_content?("See All Posts")
   end
 
-  test "As an anonymous user, I can create a new post" do
+  test "As an anonymous user, I can create a new post w/ tags" do
     visit "/"
     click_link_or_button("Create a New Post")
     assert_equal "/posts/new", current_path
     fill_in "post[title]", with: "My Second Post"
     fill_in "post[body]", with: "Post Body"
     fill_in "post[author]", with: "Sir Mix Alot"
-    fill_in "post[author]", with: "Sir Mix Alot"
-    check "post[status]"
+    find(:css, "#tag_list_tags_cool[value='Cool']").set(true)
     click_link_or_button('Submit')
     assert page.has_content?("My Second Post Post created!")
     assert_equal "My Second Post", Post.first.title
-    assert page.has_content?("Sir Mix Alot")
   end
 
-  test "As an anonymous user, I can edit my post" do
+  test "As an anonymous user, I can edit my post w/ tags" do
     visit "/"
     click_link('Edit')
     assert_equal "/posts/505/edit", current_path
     fill_in "post[title]", with: "My Second Post"
+    find(:css, "#tag_list_tags_cool[value='Cool']").set(true)
     click_link_or_button('Submit')
     assert_equal "/", current_path
     assert page.has_content?("My Second Post Post updated!")

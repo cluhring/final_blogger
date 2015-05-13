@@ -24,12 +24,3 @@ class TagsControllerTest < ActionController::TestCase
     assert_redirected_to root_path(assigns(:tag))
   end
 end
-
-#
-# test "comments #create" do
-#   comment_params = {author: 'Mr. Bear',
-#                     body: 'Stuff about Fish and Bears'}
-#   assert_difference('Comment.count') do
-#     post :create, comment: comment_params, post_id: @post
-#   end
-# end

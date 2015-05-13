@@ -17,6 +17,13 @@
     <%= f.label :author %><br>
     <%= f.text_field :author %>
   </p>
+	<p>
+		<%= f.label :tags, "Tags", class: "col-sm-2 control-label" %>
+		<%   @tags.each do |tag| %>
+			<%=  f.label :tag_list, tag.name, class: "checkbox-inline" %>
+			<%=  check_box(:tag_list, "tags", {:multiple => true}, tag.name, nil) %>
+		<% end %>
+	</p>
   <p>
     <%= f.label "Publish?" %><br>
     <%= check_box(:post, :status, {}, true)%>
