@@ -11,18 +11,36 @@
   </div>
   <p class="post_markdown"><%= markdown(@post.body).html_safe %></p>
   <p><%= @post.author %></p>
-  <h3>Comments (<%= @post.comments.size %>)</h3>
-  <div class="comments">
+  <h3 id="comments_count">Comments (<%= @post.comments.size %>)</h3>
+  <div class="comments" id="final_hurdle">
     <% @post.comments.each do |comment| %>
     	<u>Comment by <%= comment.author %>:</u>
     	<p class="comment"><%= markdown(comment.body).html_safe %></p>
     <% end %>
   </div>
+  <div id="final-hurdle"></div>
   <div class="my_new_comment">
     <h4> Add a Comment to the <%= @post.title %> Post:</h4>
-    <%= render partial: 'comments/form' %><br><br>
-  </div>
+    <%= render partial: 'comments/form' %>
+    <!-- <input type="submit" class="button complete-task" id="last-hurdle" value="Magic Submit!"></input></td> -->
+  </div><br><br>
   <%= link_to "<< Back to Published Posts", posts_path %><br>
   <%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Really delete the post?"} %><br>
   <%= link_to "Edit", edit_post_path(@post) %>
 </div>
+<script>
+  // $(document).ready(function(){
+  //   $("#last-hurdle").click(function(event) {
+  //     var $commentBody = $('#comment_body').val();
+  //     event.preventDefault();
+  //     $.ajax({
+  //       type: "POST",
+  //       url: "/posts/<%= @post.id %>/comments",
+  //       data: "comment=" + "body=" + $commentBody,
+  //       success: function(result) {
+  //         $(".comment").append(result)
+  //       },
+  //     });
+  //   });
+  // });
+</script>

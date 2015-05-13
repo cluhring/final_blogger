@@ -50,17 +50,14 @@
             </div>
           </div>
         <% end %>
-        <%# @tags.each do |tag| %>
-        <%#= button_to tag.name, class: 'index-tags', id: "post_#{tag.name}" %>
-        <%# end %>
       </p>
       <%= link_to "Add tag", new_tag_path %><br>
     </div>
   </div>
+  <li>
+  	<%= link_to "Create a New Post", new_post_path, class: "new_post" %>
+  </li>
+  <li>
+    <%= link_to "See All Posts", drafted_path, class: "drafts" %>
+  </li>
 </div>
-<li>
-	<%= link_to "Create a New Post", new_post_path, class: "new_post" %>
-</li>
-<li>
-  <%= link_to "See All Posts", drafted_path, class: "drafts" %>
-</li>
