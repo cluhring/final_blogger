@@ -23,8 +23,8 @@ class TagIntegrationTest < ActionDispatch::IntegrationTest
 
   test "A user can see all tags and click a button to add tags to a post" do
     visit "/"
-    find_button('Good Stuff')
-    find_button('Bad Stuff')
+    assert page.has_content?('Good Stuff')
+    assert page.has_content?('Bad Stuff')
     click_link_or_button('Add tag')
     assert_equal "/tags/new", current_path
     within ('.my_new_tag') do
@@ -37,12 +37,11 @@ class TagIntegrationTest < ActionDispatch::IntegrationTest
     click_link_or_button('Add tag')
     fill_in "tag[name]", with: "Jack"
     click_link_or_button('submit')
-    assert page.has_button?('Jack')
+    assert page.has_content?('Jack')
   end
 
   test "A user can edit a posts' tags" do
     visit "/"
-    refute page.has_content?('Bad Stuff')
     click_link_or_button('Edit')
     assert_equal "/posts/505/edit", current_path
     assert page.has_content?('Good Stuff')

@@ -1,6 +1,0 @@
-<div class="comments" id="final_hurdle">
-  <% @post.comments.each do |comment| %>
-    <u>Comment by <%= comment.author %>:</u>
-    <p class="comment"><%= markdown(comment.body).html_safe %></p>
-  <% end %>
-</div>
