@@ -7,7 +7,7 @@
 
 $("#new_comment").before('<div id="flash_notice"><%= escape_javascript(flash.delete(:notice)) %></div>');
 $("#comments_count").html("<%= pluralize(@post.comments.size, 'Comment') %>");
-$("#final_hurdle").append("<%= j render(@form) %>");
+$("#final_hurdle").append("<%= j render(@comment) %>");
 $("#new_comment")[0].reset();
 
 // $("#new_comment").remove();

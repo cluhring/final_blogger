@@ -45,7 +45,9 @@
   $(document).ready(function(){
     $("#poop").click(function(event) {
       var $commentBody = $('#comment_body').val();
-      $("#final_hurdle").append($commentBody)
+      var $commentAuthor = $('#comment_author').val();
+      $("#final_hurdle").append("<br><br><u>Comment by " + $commentAuthor + ":</u><br><br>")
+      $("#final_hurdle").append("\n" + $commentBody)
     });
   });
 </script>
