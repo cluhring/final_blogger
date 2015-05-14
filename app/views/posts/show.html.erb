@@ -18,7 +18,6 @@
     	<p class="comment"><%= markdown(comment.body).html_safe %></p>
     <% end %>
   </div>
-  <div id="final-hurdle"></div>
   <div class="my_new_comment">
     <h4> Add a Comment to the <%= @post.title %> Post:</h4>
     <%= render partial: 'comments/form' %>
@@ -43,4 +42,10 @@
   //     });
   //   });
   // });
+  $(document).ready(function(){
+    $("#poop").click(function(event) {
+      var $commentBody = $('#comment_body').val();
+      $("#final_hurdle").append($commentBody)
+    });
+  });
 </script>
